@@ -22,15 +22,22 @@ export function NewTransactionModal({ isOpen, onRequestClose }: NewTransactionMo
   const [amount, setAmount] = useState(0);
   const [type, setType] = useState('deposit');
 
-  function handelCreateNewTransaction(event: FormEvent) {
+  async function handelCreateNewTransaction(event: FormEvent) {
     event.preventDefault();
 
-    createTransaction({
+    await createTransaction({
       title,
       amount,
       category,
       type,
     })
+
+    setTitle('');
+    setAmount(0);
+    setCategory('');
+    setType('deposit');
+
+    onRequestClose();
   }
 
   return (
